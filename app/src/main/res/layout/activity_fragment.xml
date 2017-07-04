@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/activity_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/fragment_toolbar" />
+
+        <com.example.administrator.assetsapp.ChartView
+            android:id="@+id/chart_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="230dp" />
+
+        <com.example.administrator.assetsapp.ChartView
+            android:id="@+id/chart_view_2"
+            android:layout_width="match_parent"
+            android:layout_height="230dp" />
+
+        <TextView
+            android:id="@+id/Tv_qi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="气体传感器当前情况：正常"
+            android:textColor="#ff5400" />
+
+        <TextView
+            android:id="@+id/Tv_huo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="火焰传感器当前情况：正常"
+            android:textColor="#ff5400" />
+    </LinearLayout>
+
+
+</ScrollView>

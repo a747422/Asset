@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+        <TextView
+            android:id="@+id/tv_card_name"
+            style="@style/content_top_gravity"
+            android:text="设备名"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_place_name"
+            style="@style/content_top_gravity"
+            android:text="地点"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_in_out"
+            style="@style/content_top_gravity"
+            android:text="出入库"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_mASKSYNCV2"
+            style="@style/content_top_gravity"
+            android:text="日期"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

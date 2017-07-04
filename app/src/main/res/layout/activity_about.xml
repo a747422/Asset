@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/about_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:background="@color/darksalmon"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/logo" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/li_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/nav_header_vertical_spacing"
+            android:text="简介"
+            android:textColor="@color/palevioletred"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/nav_header_vertical_spacing"
+            android:text="        对资产实时监管，实时采集温湿度、\n火焰监测、气体监测等。实施对资产的\n智能化、自动化、一体化管理。"
+            android:textColor="@color/viewfinder_mask" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/nav_header_vertical_spacing"
+            android:text="联系方式"
+            android:textColor="@color/palevioletred"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/nav_header_vertical_spacing"
+            android:text="QQ邮箱：747422053@qq.com"
+            android:textColor="@color/viewfinder_mask" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/nav_header_vertical_spacing"
+            android:text="联系电话：0771-123896"
+            android:textColor="@color/viewfinder_mask" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="24dp"
+        android:text="版权所有©2017 物联资产管理"
+        android:textColor="@color/main" />
+</LinearLayout>
