@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
     //记录第一次点击的时间
     private long clickTime = 0;
     public static final String TAG = "Main2";
-    public static final String API_BASE_URL = "http://112.74.212.95/php/";
+    public static final String API_BASE_URL = "http://112.74.212.95/php/select_latest_temp.php";
     public String resp = "";
     //将数值存放在list
     List<HashMap<String, Object>> list = new ArrayList<>();
@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mainTimer = new Timer();
-        setTimerTask();
+       // setTimerTask();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        getview();
+      // getview();
         initView();
 
     }
@@ -111,103 +111,104 @@ public class MainActivity extends AppCompatActivity
         llLabel.setOnClickListener(this);
         llAdout.setOnClickListener(this);
     }
-//网络请求，使用Xutils框架
-    public void getview() {
-        RequestParams requestParams = new RequestParams("http://112.74.212.95/php/select_latest_temp.php");
-        x.http().get(requestParams, new Callback.CacheCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                if (result.length() > 5) {
-                    Log.d(TAG, result);
-                    parseJSONWithGSON(result);
-                }
-            }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
-                if (ex instanceof HttpException) { // 网络错误
-                    HttpException httpEx = (HttpException) ex;
-                    int responseCode = httpEx.getCode();
-                    String responseMsg = httpEx.getMessage();
-                    String errorResult = httpEx.getResult();
-                    // ...
-                } else { // 其他错误
-                    // ...
-                }
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-
-            @Override
-            public boolean onCache(String result) {
-                return false;
-            }
-        });
-
-        }
-//数据解析显示
-    private void parseJSONWithGSON(String response) {
-
-        int k = 0, i = 0;
-        Gson gson = new Gson();
-        List<MainBean> ressult = gson.fromJson(response, new TypeToken<List<MainBean>>() {
-        }.getType());
-        for (MainBean res : ressult) {
-            Log.d(TAG, "id is " + res.getHappenTime());
-            Log.d(TAG, "pwd is " + res.getPlaceName());
-            tvTSite.setText(res.getPlaceName());
-            tvTTime.setText(res.getHappenTime());
-            tvTData.setText(res.getTemp() + "°");
-            tvHSite.setText(res.getPlaceName());
-            tvHTime.setText(res.getHappenTime());
-            tvHData.setText(res.getHumidity() + "%");
-            tvGSite.setText(res.getPlaceName());
-            tvGTime.setText(res.getHappenTime());
-            tvGData.setText(res.getQi());
-            if(res.getQi().contains("异常")){
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-//                        dialog.setIcon(R.drawable.check_bg)
-                dialog.setTitle("提示");
-                dialog.setMessage(res.getPlaceName()+"地点，气体异常，请马上前往地点查看！");
-                dialog.setPositiveButton("确定", new
-                        DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                            }
-                        });
-
-                dialog.show();
-            }
-            tvFSite.setText(res.getPlaceName());
-            tvFTime.setText(res.getHappenTime());
-            tvFData.setText(res.getHuo());
-            if(res.getQi().contains("异常")){
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                dialog.setTitle("提示");
-                dialog.setMessage(res.getPlaceName()+"地点，火焰异常，请马上前往地点查看！");
-                dialog.setPositiveButton("确定", new
-                        DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
-                            }
-                        });
-
-                dialog.show();
-            }
-        }
-
-    }
+////网络请求，使用Xutils框架
+//    public void getview() {
+//        RequestParams requestParams = new RequestParams(API_BASE_URL);
+//        x.http().get(requestParams, new Callback.CacheCallback<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                if (result.length() > 5) {
+//                    Log.d(TAG, result);
+//                    parseJSONWithGSON(result);
+//                }
+//            }
+//
+//            @Override
+//            public void onError(Throwable ex, boolean isOnCallback) {
+//                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
+//                if (ex instanceof HttpException) { // 网络错误
+//                    HttpException httpEx = (HttpException) ex;
+//                    int responseCode = httpEx.getCode();
+//                    String responseMsg = httpEx.getMessage();
+//                    String errorResult = httpEx.getResult();
+//                    // ...
+//                } else { // 其他错误
+//                    // ...
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(CancelledException cex) {
+//                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onFinished() {
+//
+//            }
+//
+//            @Override
+//            public boolean onCache(String result) {
+//                return false;
+//            }
+//        });
+//
+//        }
+////数据解析显示
+//    private void parseJSONWithGSON(String response) {
+//
+//        int k = 0, i = 0;
+//        Gson gson = new Gson();
+//        List<MainBean> ressult = gson.fromJson(response, new TypeToken<List<MainBean>>() {
+//        }.getType());
+//        for (MainBean res : ressult) {
+//            Log.d(TAG, "id is " + res.getHappenTime());
+//            Log.d(TAG, "pwd is " + res.getPlaceName());
+//            tvTSite.setText(res.getPlaceName());
+//            tvTTime.setText(res.getHappenTime());
+//            tvTData.setText(res.getTemp() + "°");
+//            tvHSite.setText(res.getPlaceName());
+//            tvHTime.setText(res.getHappenTime());
+//            tvHData.setText(res.getHumidity() + "%");
+//            tvGSite.setText(res.getPlaceName());
+//            tvGTime.setText(res.getHappenTime());
+//            tvGData.setText(res.getQi());
+//            if(res.getQi().contains("异常")){
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+////                        dialog.setIcon(R.drawable.check_bg)
+//                dialog.setTitle("提示");
+//                dialog.setMessage(res.getPlaceName()+"地点，气体异常，请马上前往地点查看！");
+//                dialog.setPositiveButton("确定", new
+//                        DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                finish();
+//                            }
+//                        });
+//
+//                dialog.show();
+//            }
+//            tvFSite.setText(res.getPlaceName());
+//            tvFTime.setText(res.getHappenTime());
+//            tvFData.setText(res.getHuo());
+//            if(res.getQi().contains("异常")){
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+//                dialog.setTitle("提示");
+//                dialog.setMessage(res.getPlaceName()+"地点，火焰异常，请马上前往地点查看！");
+//                dialog.setPositiveButton("确定", new
+//                        DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                finish();
+//                            }
+//                        });
+//
+//                dialog.show();
+//            }
+//        }
+//
+//    }
 
     @Override
     public void onBackPressed() {
@@ -358,12 +359,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void setTimerTask() {
-        mainTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                getview();
-            }
-        }, 200, 500);//表示200毫秒之后，每隔500毫秒执行一次
-    }
+//    private void setTimerTask() {
+//        mainTimer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                getview();
+//            }
+//        }, 200, 500);//表示200毫秒之后，每隔500毫秒执行一次
+//    }
 }

@@ -29,7 +29,14 @@
             app:mask_color="@color/viewfinder_mask"
             app:result_color="@color/result_view"
             app:result_point_color="@color/result_point_color"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/app_logo"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="8dp"
 
+            />
     </FrameLayout>
 
 </LinearLayout>
