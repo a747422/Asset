@@ -42,144 +42,148 @@
         </LinearLayout>
 
         <View style="@style/V" />
-
-        <LinearLayout
+        <ListView
+            android:id="@+id/list_mian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/content_top_horizontal_margin"
-            android:paddingTop="@dimen/content_top_horizontal_margin">
+            />
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingBottom="@dimen/content_top_horizontal_margin"-->
+            <!--android:paddingTop="@dimen/content_top_horizontal_margin">-->
 
-            <TextView
-                android:id="@+id/tvT"
-                style="@style/content_top_gravity"
-                android:text="温度"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvT"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="温度"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvTSite"
-                style="@style/content_top_gravity"
-                android:text="仓库"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvTSite"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="仓库"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvTTime"
-                style="@style/content_top_gravity"
-                android:text="2017-05-11 18:32:00"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvTTime"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="2017-05-11 18:32:00"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvTData"
-                style="@style/content_top_gravity"
-                android:text="28°"
-                android:textSize="16sp" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/tvTData"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="28°"-->
+                <!--android:textSize="16sp" />-->
+        <!--</LinearLayout>-->
 
-        <View style="@style/V" />
+        <!--<View style="@style/V" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/content_top_horizontal_margin"
-            android:paddingTop="@dimen/content_top_horizontal_margin">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingBottom="@dimen/content_top_horizontal_margin"-->
+            <!--android:paddingTop="@dimen/content_top_horizontal_margin">-->
 
-            <TextView
-                android:id="@+id/tvH"
-                style="@style/content_top_gravity"
-                android:text="湿度"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvH"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="湿度"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvHSite"
-                style="@style/content_top_gravity"
-                android:text="仓库"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvHSite"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="仓库"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvHTime"
-                style="@style/content_top_gravity"
-                android:text="2017-05-11 18:32:00"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvHTime"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="2017-05-11 18:32:00"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvHData"
-                style="@style/content_top_gravity"
-                android:text="35%"
-                android:textSize="16sp" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/tvHData"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="35%"-->
+                <!--android:textSize="16sp" />-->
+        <!--</LinearLayout>-->
 
-        <View style="@style/V" />
+        <!--<View style="@style/V" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/content_top_horizontal_margin"
-            android:paddingTop="@dimen/content_top_horizontal_margin">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingBottom="@dimen/content_top_horizontal_margin"-->
+            <!--android:paddingTop="@dimen/content_top_horizontal_margin">-->
 
-            <TextView
-                android:id="@+id/tvG"
-                style="@style/content_top_gravity"
-                android:text="气体"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvG"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="气体"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvGSite"
-                style="@style/content_top_gravity"
-                android:text="仓库"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvGSite"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="仓库"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvGTime"
-                style="@style/content_top_gravity"
-                android:text="2017-05-11 18:32:00"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvGTime"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="2017-05-11 18:32:00"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvGData"
-                style="@style/content_top_gravity"
-                android:text="正常"
-                android:textSize="16sp" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/tvGData"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="正常"-->
+                <!--android:textSize="16sp" />-->
+        <!--</LinearLayout>-->
 
-        <View style="@style/V" />
+        <!--<View style="@style/V" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/content_top_horizontal_margin"
-            android:paddingTop="@dimen/content_top_horizontal_margin">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingBottom="@dimen/content_top_horizontal_margin"-->
+            <!--android:paddingTop="@dimen/content_top_horizontal_margin">-->
 
 
-            <TextView
-                android:id="@+id/tvF"
-                style="@style/content_top_gravity"
-                android:text="火焰"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvF"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="火焰"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvFSite"
-                style="@style/content_top_gravity"
-                android:text="仓库"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvFSite"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="仓库"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvFTime"
-                style="@style/content_top_gravity"
-                android:text="2017-05-11 18:32:00"
-                android:textSize="16sp" />
+            <!--<TextView-->
+                <!--android:id="@+id/tvFTime"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="2017-05-11 18:32:00"-->
+                <!--android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/tvFData"
-                style="@style/content_top_gravity"
-                android:text="正常"
-                android:textSize="16sp" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/tvFData"-->
+                <!--style="@style/content_top_gravity"-->
+                <!--android:text="正常"-->
+                <!--android:textSize="16sp" />-->
+        <!--</LinearLayout>-->
     </LinearLayout>
 </ScrollView>

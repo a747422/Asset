@@ -16,11 +16,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.assetsapp.Bean.LabelBean;
 import com.example.administrator.assetsapp.Bean.MainBean;
+import com.example.administrator.assetsapp.DropDownMenu.ShowListView;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.zxing.activity.CaptureActivity;
 import com.google.zxing.activity.PermissionUtils;
@@ -55,30 +62,33 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.llAdout)
     LinearLayout llAdout;
 
-    @BindView(R.id.tvTSite)
-    TextView tvTSite;
-    @BindView(R.id.tvTTime)
-    TextView tvTTime;
-    @BindView(R.id.tvTData)
-    TextView tvTData;
-    @BindView(R.id.tvHSite)
-    TextView tvHSite;
-    @BindView(R.id.tvHTime)
-    TextView tvHTime;
-    @BindView(R.id.tvHData)
-    TextView tvHData;
-    @BindView(R.id.tvGSite)
-    TextView tvGSite;
-    @BindView(R.id.tvGTime)
-    TextView tvGTime;
-    @BindView(R.id.tvGData)
-    TextView tvGData;
-    @BindView(R.id.tvFSite)
-    TextView tvFSite;
-    @BindView(R.id.tvFTime)
-    TextView tvFTime;
-    @BindView(R.id.tvFData)
-    TextView tvFData;
+//    @BindView(R.id.list_mian)
+//    ListView listMain;
+//
+//    @BindView(R.id.tvTSite)
+//    TextView tvTSite;
+//    @BindView(R.id.tvTTime)
+//    TextView tvTTime;
+//    @BindView(R.id.tvTData)
+//    TextView tvTData;
+//    @BindView(R.id.tvHSite)
+//    TextView tvHSite;
+//    @BindView(R.id.tvHTime)
+//    TextView tvHTime;
+//    @BindView(R.id.tvHData)
+//    TextView tvHData;
+//    @BindView(R.id.tvGSite)
+//    TextView tvGSite;
+//    @BindView(R.id.tvGTime)
+//    TextView tvGTime;
+//    @BindView(R.id.tvGData)
+//    TextView tvGData;
+//    @BindView(R.id.tvFSite)
+//    TextView tvFSite;
+//    @BindView(R.id.tvFTime)
+//    TextView tvFTime;
+//    @BindView(R.id.tvFData)
+//    TextView tvFData;
 
     public static final int REQUEST_CODE = 0;
     //记录第一次点击的时间
@@ -111,7 +121,81 @@ public class MainActivity extends AppCompatActivity
         llLabel.setOnClickListener(this);
         llAdout.setOnClickListener(this);
     }
+//    //网络请求
+//    public void getView() {
+//        RequestParams requestParams = new RequestParams("http://112.74.212.95/php/select_asset.php");
+//        x.http().get(requestParams, new Callback.CacheCallback<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                if (result.length() > 5) {
+//                    list.clear();
+//                    list = parseJSONWithGSON(result);
+//                    Log.d(TAG, "list is " + list);
+//                    ShowListView showListView = new ShowListView(LabelActivity.this, list, R.layout.item_list_content);
+//                    listView.setAdapter(showListView);
+//                    showListView.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onError(Throwable ex, boolean isOnCallback) {
+//                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
+//                if (ex instanceof HttpException) { // 网络错误
+//                    HttpException httpEx = (HttpException) ex;
+//                    int responseCode = httpEx.getCode();
+//                    String responseMsg = httpEx.getMessage();
+//                    String errorResult = httpEx.getResult();
+//                    // ...
+//                } else { // 其他错误
+//                    // ...
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(CancelledException cex) {
+//                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onFinished() {
+//
+//            }
+//
+//            @Override
+//            public boolean onCache(String result) {
+//                return false;
+//            }
+//        });
+//
+//    }
 
+    public List<HashMap<String, Object>> parseJSONWithGSON(String response) {
+        JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
+        JsonArray jsonArray = jsonObject.getAsJsonArray("data");
+        Gson gson = new Gson();
+        ArrayList<LabelBean> labelBeans = new ArrayList<>();
+        for (JsonElement res : jsonArray) {
+            LabelBean labelBean = gson.fromJson(res, new TypeToken<LabelBean>() {
+            }.getType());
+            labelBeans.add(labelBean);
+        }
+
+
+        for (LabelBean res : labelBeans) {
+            Log.d(TAG, "设备名  " + res.getCardName());
+            Log.d(TAG, "地点    " + res.getPlaceName());
+            Log.d(TAG, "出入库  " + res.getInout());
+            Log.d(TAG, "时间    " + res.getMASKSYNCV2());
+
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("CardName", res.getCardName());
+            map.put("PlaceName", res.getPlaceName());
+            map.put("Inout", res.getInout());
+            map.put("MASKSYNCV2", res.getMASKSYNCV2());
+            list.add(map);
+        }
+        return list;
+    }
 ////网络请求，使用Xutils框架
 //    public void getview() {
 //        RequestParams requestParams = new RequestParams(API_BASE_URL);

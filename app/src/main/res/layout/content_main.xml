@@ -2,66 +2,115 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/j" android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior" tools:showIn="@layout/app_bar_main"
-    xsi:schemaLocation="http://schemas.android.com/apk/res/android ">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/j"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_main"
+    xsi:schemaLocation="http://schemas.android.com/apk/res/android">
 
-    <include layout="@layout/content_top" android:layout_width="match_parent"
-        android:layout_height="0dp" android:layout_weight="1" />
+    <include
+        layout="@layout/content_top"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:background="#70c4f1ff" android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#70c4f1ff"
+        android:orientation="vertical">
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <LinearLayout android:id="@+id/llSensor" style="@style/content_main_LinearLayout">
+            <LinearLayout
+                android:id="@+id/llSensor"
+                style="@style/content_main_LinearLayout">
 
-                <ImageView style="@style/content_main_view" android:background="@drawable/sensor" />
+                <ImageView
+                    style="@style/content_main_view"
+                    android:background="@drawable/sensor" />
 
-                <TextView style="@style/content_main_view" android:paddingTop="8dp"
-                    android:text="传感器管理" android:textSize="16sp" />
+                <TextView
+                    style="@style/content_main_view"
+                    android:paddingTop="8dp"
+                    android:text="传感器管理"
+                    android:textSize="16sp" />
             </LinearLayout>
 
-            <View android:layout_width="1dp" android:layout_height="match_parent"
-                android:layout_marginBottom="16dp" android:layout_marginTop="16dp"
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@color/snow" />
 
-            <LinearLayout android:id="@+id/llScan" style="@style/content_main_LinearLayout">
+            <LinearLayout
+                android:id="@+id/llScan"
+                style="@style/content_main_LinearLayout">
 
-                <ImageView style="@style/content_main_view"
+                <ImageView
+                    style="@style/content_main_view"
                     android:background="@drawable/scanner" />
 
-                <TextView style="@style/content_main_view" android:paddingTop="8dp"
-                    android:text="扫一扫" android:textSize="16sp" />
+                <TextView
+                    style="@style/content_main_view"
+                    android:paddingTop="8dp"
+                    android:text="扫一扫"
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <View style="@style/V" android:background="@color/snow" />
+        <View
+            style="@style/V"
+            android:background="@color/snow" />
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <LinearLayout android:id="@+id/llLabel" style="@style/content_main_LinearLayout">
+            <LinearLayout
+                android:id="@+id/llLabel"
+                style="@style/content_main_LinearLayout">
 
-                <ImageView style="@style/content_main_view" android:background="@drawable/in_out" />
+                <ImageView
+                    style="@style/content_main_view"
+                    android:background="@drawable/in_out" />
 
-                <TextView style="@style/content_main_view" android:paddingTop="8dp"
-                    android:text="资产记录" android:textSize="16sp" />
+                <TextView
+                    style="@style/content_main_view"
+                    android:paddingTop="8dp"
+                    android:text="资产记录"
+                    android:textSize="16sp" />
             </LinearLayout>
 
-            <View android:layout_width="1dp" android:layout_height="match_parent"
-                android:layout_marginBottom="16dp" android:layout_marginTop="16dp"
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@color/snow" />
 
-            <LinearLayout android:id="@+id/llAdout" style="@style/content_main_LinearLayout">
+            <LinearLayout
+                android:id="@+id/llAdout"
+                style="@style/content_main_LinearLayout">
 
-                <ImageView style="@style/content_main_view" android:background="@drawable/info" />
+                <ImageView
+                    style="@style/content_main_view"
+                    android:background="@drawable/info" />
 
-                <TextView style="@style/content_main_view" android:paddingTop="8dp"
-                    android:text="关于我们" android:textSize="16sp" />
+                <TextView
+                    style="@style/content_main_view"
+                    android:paddingTop="8dp"
+                    android:text="关于我们"
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
