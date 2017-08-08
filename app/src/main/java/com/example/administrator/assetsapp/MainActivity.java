@@ -47,8 +47,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.view.View.*;
+
 /**
- *      主页面
+ * 主页面
  */
 
 public class MainActivity extends AppCompatActivity
@@ -62,9 +63,9 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.llAdout)
     LinearLayout llAdout;
 
-//    @BindView(R.id.list_mian)
-//    ListView listMain;
-//
+    @BindView(R.id.list_mian)
+    ListView listMain;
+
 //    @BindView(R.id.tvTSite)
 //    TextView tvTSite;
 //    @BindView(R.id.tvTTime)
@@ -107,10 +108,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mainTimer = new Timer();
-       // setTimerTask();
+        setTimerTask();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-      // getview();
+        getView();
         initView();
 
     }
@@ -121,53 +122,54 @@ public class MainActivity extends AppCompatActivity
         llLabel.setOnClickListener(this);
         llAdout.setOnClickListener(this);
     }
-//    //网络请求
-//    public void getView() {
-//        RequestParams requestParams = new RequestParams("http://112.74.212.95/php/select_asset.php");
-//        x.http().get(requestParams, new Callback.CacheCallback<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//                if (result.length() > 5) {
-//                    list.clear();
-//                    list = parseJSONWithGSON(result);
-//                    Log.d(TAG, "list is " + list);
-//                    ShowListView showListView = new ShowListView(LabelActivity.this, list, R.layout.item_list_content);
-//                    listView.setAdapter(showListView);
-//                    showListView.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
-//                if (ex instanceof HttpException) { // 网络错误
-//                    HttpException httpEx = (HttpException) ex;
-//                    int responseCode = httpEx.getCode();
-//                    String responseMsg = httpEx.getMessage();
-//                    String errorResult = httpEx.getResult();
-//                    // ...
-//                } else { // 其他错误
-//                    // ...
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//
-//            }
-//
-//            @Override
-//            public boolean onCache(String result) {
-//                return false;
-//            }
-//        });
-//
-//    }
+
+    //网络请求
+    public void getView() {
+        RequestParams requestParams = new RequestParams("http://112.74.212.95/php/select_asset.php");
+        x.http().get(requestParams, new Callback.CacheCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                if (result.length() > 5) {
+                    list.clear();
+                    list = parseJSONWithGSON(result);
+                    Log.d(TAG, "list is " + list);
+                    ShowListView showListView = new ShowListView(MainActivity.this, list, R.layout.item_list_content);
+                    listMain.setAdapter(showListView);
+                    showListView.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                if (ex instanceof HttpException) { // 网络错误
+                    HttpException httpEx = (HttpException) ex;
+                    int responseCode = httpEx.getCode();
+                    String responseMsg = httpEx.getMessage();
+                    String errorResult = httpEx.getResult();
+                    // ...
+                } else { // 其他错误
+                    // ...
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public boolean onCache(String result) {
+                return false;
+            }
+        });
+
+    }
 
     public List<HashMap<String, Object>> parseJSONWithGSON(String response) {
         JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
@@ -431,7 +433,8 @@ public class MainActivity extends AppCompatActivity
         }
         return super.onKeyDown(keyCode, event);
     }
-//判断是否退出
+
+    //判断是否退出
     private void exit() {
         if ((System.currentTimeMillis() - clickTime) > 2000) {
             Toast.makeText(getApplicationContext(), "提示：再按一次后退键退出程序",
@@ -443,12 +446,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    private void setTimerTask() {
-//        mainTimer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                getview();
-//            }
-//        }, 200, 500);//表示200毫秒之后，每隔500毫秒执行一次
-//    }
+    private void setTimerTask() {
+        mainTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getView();
+            }
+        }, 200, 500);//表示200毫秒之后，每隔500毫秒执行一次
+    }
 }
