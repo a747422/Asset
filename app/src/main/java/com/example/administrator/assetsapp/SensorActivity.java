@@ -1,7 +1,9 @@
 package com.example.administrator.assetsapp;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
@@ -107,7 +109,38 @@ public class SensorActivity extends AppCompatActivity {
                     mChartView2.fresh();
                     tvQ.setText("气体传感器当前情况：" + qi[6].toString());
                     tvH.setText("火焰传感器当前情况：" + huo[6].toString());
-                } else {
+                    if (qi[6].toString().contains("异常")) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(SensorActivity.this);
+//                        dialog.setIcon(R.drawable.check_bg)
+                        dialog.setTitle("提示");
+                        dialog.setMessage(qi[6].toString() + "地点，气体异常，请马上前往地点查看！");
+                        dialog.setPositiveButton("确定", new
+                                DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                });
+
+                        dialog.show();
+                    }
+
+                    if (huo[6].toString().contains("异常")) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(SensorActivity.this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage(huo[6].toString() + "地点，火焰异常，请马上前往地点查看！");
+                        dialog.setPositiveButton("确定", new
+                                DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                });
+                        dialog.show();
+                    }
+                } else
+
+                {
                     Log.d(TAG, "超时");
                 }
             }
@@ -147,7 +180,8 @@ public class SensorActivity extends AppCompatActivity {
     void btn() {
         finish();
     }
-//定时请求数据
+
+    //定时请求数据
     private void setTimerTask() {
         mainTimer.schedule(new TimerTask() {
             @Override
