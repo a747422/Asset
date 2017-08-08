@@ -182,19 +182,22 @@ public class MainActivity extends AppCompatActivity
             labelBeans.add(labelBean);
         }
 
-
+        int i = 0;
         for (LabelBean res : labelBeans) {
             Log.d(TAG, "设备名  " + res.getCardName());
             Log.d(TAG, "地点    " + res.getPlaceName());
             Log.d(TAG, "出入库  " + res.getInout());
             Log.d(TAG, "时间    " + res.getMASKSYNCV2());
-
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("CardName", res.getCardName());
             map.put("PlaceName", res.getPlaceName());
             map.put("Inout", res.getInout());
             map.put("MASKSYNCV2", res.getMASKSYNCV2());
             list.add(map);
+            i++;
+            if(i>3){
+                break;
+            }
         }
         return list;
     }
