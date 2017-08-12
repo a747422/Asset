@@ -1,10 +1,8 @@
 package com.example.administrator.assetsapp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,12 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.assetsapp.Bean.LabelBean;
-import com.example.administrator.assetsapp.Bean.MainBean;
-import com.example.administrator.assetsapp.DropDownMenu.ShowListView;
+import com.example.administrator.assetsapp.Bean.ShowListView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

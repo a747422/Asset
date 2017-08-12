@@ -1,4 +1,4 @@
-package com.example.administrator.assetsapp.DropDownMenu;
+package com.example.administrator.assetsapp.Bean;
 
 import android.content.Context;
 import android.view.LayoutInflater;

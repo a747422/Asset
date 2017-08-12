@@ -35,7 +35,5 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.2.0'
-    compile project(':library')
-    compile project(path: ':smallchart')
     compile 'org.xutils:xutils:3.5.0'
 }

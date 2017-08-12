@@ -1,6 +1,5 @@
 package com.example.administrator.assetsapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.assetsapp.Bean.LabelBean;
-import com.example.administrator.assetsapp.Bean.MyTestApiService;
-import com.example.administrator.assetsapp.DropDownMenu.ShowListView;
+import com.example.administrator.assetsapp.Bean.ShowListView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
