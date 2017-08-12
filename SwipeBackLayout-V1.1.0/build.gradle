@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('SwipeBackLayout-V1.1.0.aar'))

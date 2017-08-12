@@ -17,7 +17,7 @@ import butterknife.OnClick;
  * 关于我们
  */
 
-public class AdoutActivity extends AppCompatActivity {
+public class AdoutActivity extends BaseActivity {
     @BindView(R.id.adout_toolbar_back)
     ImageView back;
     @Override

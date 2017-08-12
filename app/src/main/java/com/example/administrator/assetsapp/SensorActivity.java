@@ -33,7 +33,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/5/8.
  */
 
-public class SensorActivity extends AppCompatActivity {
+public class SensorActivity extends BaseActivity {
     @BindView(R.id.fragment_toolbar_back)
     ImageView toolbarBack;
     @BindView(R.id.chart_view_1)

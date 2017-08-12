@@ -30,6 +30,7 @@ import android.view.SurfaceView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.administrator.assetsapp.BaseActivity;
 import com.example.administrator.assetsapp.Bean.LabelBean;
 import com.example.administrator.assetsapp.Bean.MyTestApiService;
 import com.example.administrator.assetsapp.R;
@@ -72,7 +73,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * 二维码扫描。
  * @author Ryan.Tang
  */
-public class CaptureActivity extends AppCompatActivity implements Callback {
+public class CaptureActivity extends BaseActivity implements Callback {
 
     private static final int REQUEST_CODE_SCAN_GALLERY = 100;
 

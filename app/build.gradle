@@ -18,7 +18,12 @@ android {
         }
     }
 }
+repositories {
 
+    flatDir {
+        dirs 'libs'
+    }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -36,4 +41,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.2.0'
     compile 'org.xutils:xutils:3.5.0'
+    compile 'com.wenwenwen888:searchbox:1.0.0'
+    //compile 'me.imid.swipebacklayout.lib:library:1.0.0'
+    compile(name: 'SwipeBackLayout-V1.1.0', ext: 'aar')
 }
