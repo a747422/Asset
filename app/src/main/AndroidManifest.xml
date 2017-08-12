@@ -23,6 +23,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
+            android:theme="@style/AppTheme"
             android:configChanges="keyboardHidden|orientation|screenSize"><!--切换屏幕时不重启activity-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

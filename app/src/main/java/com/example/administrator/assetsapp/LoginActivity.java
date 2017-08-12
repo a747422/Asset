@@ -33,8 +33,9 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+
 /**
- *      登陆界面
+ * 登陆界面
  */
 
 
@@ -60,64 +61,74 @@ public class LoginActivity extends AppCompatActivity {
 //        passwordWrapper.setText("admin");
         ButterKnife.bind(this);
     }
+
     //登陆按钮
     @OnClick(R.id.btnLogin)
     void login() {
         String id = usernameWrapper.getText().toString();
         String pwd = passwordWrapper.getText().toString();
+        if (id.equals(null) && pwd.equals(null)) {
+            Toast.makeText(LoginActivity.this, "账号密码不能为空", Toast.LENGTH_SHORT).show();
+        } else if (id.equals(null) || pwd.equals(null)) {
+            Toast.makeText(LoginActivity.this, "账号或密码不能为空", Toast.LENGTH_SHORT).show();
+
+        } else {
+
 //        HashMap<String, Object> map = new HashMap<>();
 //        map.put("loginPwd", pwd);
 //        map.put("loginName", id);
-        RequestParams params = new RequestParams("http://112.74.212.95/php/loginandroid.php");
+            RequestParams params = new RequestParams("http://112.74.212.95/php/loginandroid.php");
 //        params.setAsJsonContent(true);
 //        params.setBodyContent(map.toString());
-        params.addBodyParameter("loginPwd", pwd);
-        params.addBodyParameter("loginName", id);
+            params.addBodyParameter("loginPwd", pwd);
+            params.addBodyParameter("loginName", id);
 
-        Callback.Cancelable cancelable
-                = x.http().get(params, new Callback.CacheCallback<String>() {
-            @Override
-            public boolean onCache(String result) {
-                return false;
-            }
-
-            @Override
-            public void onSuccess(String result) {
-                LogUtil.d("返回：" + result);
-                if (result.contains("ok")) {
-                    Intent intent = new Intent();
-                    intent.setClass(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
+            Callback.Cancelable cancelable
+                    = x.http().get(params, new Callback.CacheCallback<String>() {
+                @Override
+                public boolean onCache(String result) {
+                    return false;
                 }
-            }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
-                if (ex instanceof HttpException) { // 网络错误
-                    HttpException httpEx = (HttpException) ex;
-                    int responseCode = httpEx.getCode();
-                    String responseMsg = httpEx.getMessage();
-                    String errorResult = httpEx.getResult();
-                    // ...
-                } else { // 其他错误
-                    // ...
+                @Override
+                public void onSuccess(String result) {
+                    LogUtil.d("返回：" + result);
+                    if (result.contains("ok")) {
+                        Intent intent = new Intent();
+                        intent.setClass(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(CancelledException cex) {
-                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
-            }
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+                    Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                    if (ex instanceof HttpException) { // 网络错误
+                        HttpException httpEx = (HttpException) ex;
+                        int responseCode = httpEx.getCode();
+                        String responseMsg = httpEx.getMessage();
+                        String errorResult = httpEx.getResult();
+                        // ...
+                    } else { // 其他错误
+                        // ...
+                    }
+                }
 
-            @Override
-            public void onFinished() {
+                @Override
+                public void onCancelled(CancelledException cex) {
+                    Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
+                }
 
-            }
-        });
+                @Override
+                public void onFinished() {
+
+                }
+            });
+        }
+
     }
 }
 

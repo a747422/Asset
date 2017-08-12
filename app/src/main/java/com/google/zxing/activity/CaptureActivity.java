@@ -120,120 +120,8 @@ public class CaptureActivity extends BaseActivity implements Callback {
 
     private void addToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        ImageView more = (ImageView) findViewById(R.id.scanner_toolbar_more);
-//        assert more != null;
-//        more.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         setSupportActionBar(toolbar);
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.scanner_menu, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.scan_local:
-//                //打开手机中的相册
-//                Intent innerIntent = new Intent(Intent.ACTION_GET_CONTENT); //"android.intent.action.GET_CONTENT"
-//                innerIntent.setType("image/*");
-//                Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
-//                this.startActivityForResult(wrapperIntent, REQUEST_CODE_SCAN_GALLERY);
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
-//        if (requestCode == RESULT_OK) {
-//            switch (requestCode) {
-//                case REQUEST_CODE_SCAN_GALLERY:
-//                    //获取选中图片的路径
-//                    Cursor cursor = getContentResolver().query(data.getData(), null, null, null, null);
-//                    if (cursor.moveToFirst()) {
-//                        photo_path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-//                    }
-//                    cursor.close();
-//
-//                    mProgress = new ProgressDialog(CaptureActivity.this);
-//                    mProgress.setMessage("正在扫描...");
-//                    mProgress.setCancelable(false);
-//                    mProgress.show();
-//
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Result result = scanningImage(photo_path);
-//                            if (result != null) {
-////                                Message m = handler.obtainMessage();
-////                                m.what = R.id.decode_succeeded;
-////                                m.obj = result.getText();
-////                                handler.sendMessage(m);
-//                                Intent resultIntent = new Intent();
-//                                Bundle bundle = new Bundle();
-//                                bundle.putString("result", result.getText());
-////                                bundle.putParcelable("bitmap",result.get);
-//                                resultIntent.putExtras(bundle);
-//                                CaptureActivity.this.setResult(RESULT_OK, resultIntent);
-//
-//                            } else {
-//                                Message m = handler.obtainMessage();
-//                                m.what = R.id.decode_failed;
-//                                m.obj = "Scan failed!";
-//                                handler.sendMessage(m);
-//                            }
-//                        }
-//                    }).start();
-//                    break;
-//            }
-//        }
-//        super.onActivityResult(requestCode, resultCode, data);
-//    }
-//
-//    /**
-//     * 扫描二维码图片的方法
-//     *
-//     * @param path
-//     * @return
-//     */
-//    public Result scanningImage(String path) {
-//        if (TextUtils.isEmpty(path)) {
-//            return null;
-//        }
-//        Hashtable<DecodeHintType, String> hints = new Hashtable<>();
-//        hints.put(DecodeHintType.CHARACTER_SET, "UTF8"); //设置二维码内容的编码
-//
-//        BitmapFactory.Options options = new BitmapFactory.Options();
-//        options.inJustDecodeBounds = true; // 先获取原大小
-//        scanBitmap = BitmapFactory.decodeFile(path, options);
-//        options.inJustDecodeBounds = false; // 获取新的大小
-//        int sampleSize = (int) (options.outHeight / (float) 200);
-//        if (sampleSize <= 0)
-//            sampleSize = 1;
-//        options.inSampleSize = sampleSize;
-//        scanBitmap = BitmapFactory.decodeFile(path, options);
-//        RGBLuminanceSource source = new RGBLuminanceSource(scanBitmap);
-//        BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
-//        QRCodeReader reader = new QRCodeReader();
-//        try {
-//            return reader.decode(bitmap1, hints);
-//        } catch (NotFoundException e) {
-//            e.printStackTrace();
-//        } catch (ChecksumException e) {
-//            e.printStackTrace();
-//        } catch (FormatException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
     @Override
     protected void onResume() {
@@ -257,14 +145,6 @@ public class CaptureActivity extends BaseActivity implements Callback {
         initBeepSound();
         vibrate = true;
 
-        //quit the scan view
-//		cancelScanButton.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				CaptureActivity.this.finish();
-//			}
-//		});
     }
 
     @Override

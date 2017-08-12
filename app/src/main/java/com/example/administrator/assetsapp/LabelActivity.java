@@ -169,7 +169,7 @@ public class LabelActivity extends BaseActivity implements Toolbar.OnMenuItemCli
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //加载菜单文件
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_label, menu);
         return true;
     }
 
