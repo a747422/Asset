@@ -57,7 +57,7 @@ public class LabelActivity extends BaseActivity implements Toolbar.OnMenuItemCli
     public String resp = "";
     ProgressBar bar;
     private Timer mainTimer;
-
+    ArrayList<LabelBean> labelBeans = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,7 +134,7 @@ public class LabelActivity extends BaseActivity implements Toolbar.OnMenuItemCli
         JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
         JsonArray jsonArray = jsonObject.getAsJsonArray("data");
         Gson gson = new Gson();
-        ArrayList<LabelBean> labelBeans = new ArrayList<>();
+
         for (JsonElement res : jsonArray) {
             LabelBean labelBean = gson.fromJson(res, new TypeToken<LabelBean>() {
             }.getType());
@@ -185,52 +185,7 @@ public class LabelActivity extends BaseActivity implements Toolbar.OnMenuItemCli
 
     @Override
     public void OnSearchClick(String keyword) {
-        Toast.makeText(this, keyword, Toast.LENGTH_SHORT).show();
-        RequestParams requestParams = new RequestParams("http://112.74.212.95/php/select_asset.php");
-        requestParams.addBodyParameter("搜索", keyword);
-        x.http().post(requestParams, new Callback.CacheCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                if (result.length() > 5) {
-                    bar.setVisibility(View.GONE);
-                    list.clear();
-                    list = parseJSONWithGSON(result);
-                    Log.d(TAG, "list is " + list);
-                    ShowListView showListView = new ShowListView(LabelActivity.this, list, R.layout.item_list_content);
-                    listView.setAdapter(showListView);
-                    showListView.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
-                if (ex instanceof HttpException) { // 网络错误
-                    HttpException httpEx = (HttpException) ex;
-                    int responseCode = httpEx.getCode();
-                    String responseMsg = httpEx.getMessage();
-                    String errorResult = httpEx.getResult();
-                    // ...
-                } else { // 其他错误
-                    // ...
-                }
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-
-            @Override
-            public boolean onCache(String result) {
-                return false;
-            }
-        });
+        Toast.makeText(this, "搜索功能未完善", Toast.LENGTH_SHORT).show();
     }
 
     //定时器

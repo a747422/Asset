@@ -1,8 +1,10 @@
 package com.example.administrator.assetsapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.administrator.assetsapp.Bean.LabelBean;
 import com.example.administrator.assetsapp.Bean.ShowListView;
+import com.example.administrator.assetsapp.Bean.TempBean;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -62,30 +65,7 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.list_mian)
     ListView listMain;
 
-//    @BindView(R.id.tvTSite)
-//    TextView tvTSite;
-//    @BindView(R.id.tvTTime)
-//    TextView tvTTime;
-//    @BindView(R.id.tvTData)
-//    TextView tvTData;
-//    @BindView(R.id.tvHSite)
-//    TextView tvHSite;
-//    @BindView(R.id.tvHTime)
-//    TextView tvHTime;
-//    @BindView(R.id.tvHData)
-//    TextView tvHData;
-//    @BindView(R.id.tvGSite)
-//    TextView tvGSite;
-//    @BindView(R.id.tvGTime)
-//    TextView tvGTime;
-//    @BindView(R.id.tvGData)
-//    TextView tvGData;
-//    @BindView(R.id.tvFSite)
-//    TextView tvFSite;
-//    @BindView(R.id.tvFTime)
-//    TextView tvFTime;
-//    @BindView(R.id.tvFData)
-//    TextView tvFData;
+
 
     public static final int REQUEST_CODE = 0;
     //记录第一次点击的时间
@@ -97,7 +77,6 @@ public class MainActivity extends AppCompatActivity
     List<HashMap<String, Object>> list = new ArrayList<>();
 
     private Timer mainTimer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,103 +176,128 @@ public class MainActivity extends AppCompatActivity
         }
         return list;
     }
-////网络请求，使用Xutils框架
-//    public void getview() {
-//        RequestParams requestParams = new RequestParams(API_BASE_URL);
-//        x.http().get(requestParams, new Callback.CacheCallback<String>() {
-//            @Override
-//            public void onSuccess(String result) {
-//                if (result.length() > 5) {
-//                    Log.d(TAG, result);
-//                    parseJSONWithGSON(result);
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
-//                if (ex instanceof HttpException) { // 网络错误
-//                    HttpException httpEx = (HttpException) ex;
-//                    int responseCode = httpEx.getCode();
-//                    String responseMsg = httpEx.getMessage();
-//                    String errorResult = httpEx.getResult();
-//                    // ...
-//                } else { // 其他错误
-//                    // ...
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//
-//            }
-//
-//            @Override
-//            public boolean onCache(String result) {
-//                return false;
-//            }
-//        });
-//
-//        }
-////数据解析显示
-//    private void parseJSONWithGSON(String response) {
-//
-//        int k = 0, i = 0;
-//        Gson gson = new Gson();
-//        List<MainBean> ressult = gson.fromJson(response, new TypeToken<List<MainBean>>() {
-//        }.getType());
-//        for (MainBean res : ressult) {
-//            Log.d(TAG, "id is " + res.getHappenTime());
-//            Log.d(TAG, "pwd is " + res.getPlaceName());
-//            tvTSite.setText(res.getPlaceName());
-//            tvTTime.setText(res.getHappenTime());
-//            tvTData.setText(res.getTemp() + "°");
-//            tvHSite.setText(res.getPlaceName());
-//            tvHTime.setText(res.getHappenTime());
-//            tvHData.setText(res.getHumidity() + "%");
-//            tvGSite.setText(res.getPlaceName());
-//            tvGTime.setText(res.getHappenTime());
-//            tvGData.setText(res.getQi());
-//            if(res.getQi().contains("异常")){
-//                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-////                        dialog.setIcon(R.drawable.check_bg)
-//                dialog.setTitle("提示");
-//                dialog.setMessage(res.getPlaceName()+"地点，气体异常，请马上前往地点查看！");
-//                dialog.setPositiveButton("确定", new
-//                        DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                finish();
-//                            }
-//                        });
-//
-//                dialog.show();
-//            }
-//            tvFSite.setText(res.getPlaceName());
-//            tvFTime.setText(res.getHappenTime());
-//            tvFData.setText(res.getHuo());
-//            if(res.getQi().contains("异常")){
-//                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-//                dialog.setTitle("提示");
-//                dialog.setMessage(res.getPlaceName()+"地点，火焰异常，请马上前往地点查看！");
-//                dialog.setPositiveButton("确定", new
-//                        DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                finish();
-//                            }
-//                        });
-//
-//                dialog.show();
-//            }
-//        }
-//
-//    }
+
+    //数据采集显示
+    private void setData() {
+        Log.d(TAG, "启动");
+        final String title = "最新温度数据表(° )";
+        final String title2 = "最新湿度数据表(% )";
+        final String[] xLabel1 = new String[7];
+        final String[] xLabel2 = new String[7];
+        final String[] data1 = new String[7];
+        final String[] data2 = new String[7];
+        final String[] qi = new String[7];
+        final String[] huo = new String[7];
+        final String[] time = new String[7];
+        final String[] name = new String[7];
+        RequestParams params = new RequestParams("http://112.74.212.95/php/select_temp.php");
+
+        Callback.Cancelable cancelable
+                = x.http().get(params, new Callback.CacheCallback<String>() {
+            @Override
+            public void onSuccess(String resp) {
+                if (resp.length() > 10) {
+                    Log.d(TAG, resp);
+                    int j = 6;
+                    Gson gson = new Gson();
+                    List<TempBean> ressul = gson.fromJson(resp, new TypeToken<List<TempBean>>() {
+                    }.getType());
+                    for (TempBean res : ressul) {
+                        Log.d(TAG, "Temp is " + res.getTemp());
+                        Log.d(TAG, "Humidity is " + res.getHumidity());
+                        String str = res.getHappenTime().toString().substring(11);
+                        time[j] = res.getHappenTime().toString().substring(0, 10);
+                        Log.d(TAG, "Time is " + time[j]);
+                        Log.d(TAG, "str is " + str);
+                        xLabel1[j] = str;
+                        xLabel2[j] = str;
+                        data1[j] = res.getTemp();
+                        data2[j] = res.getHumidity();
+                        qi[j] = res.getQi();
+                        huo[j] = res.getHuo();
+                        name[j] = res.getplaceName().toString();
+                        j--;
+                    }
+
+                    if (Double.parseDouble(data2[6].toString()) >= 90.0) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage(name[6]+"湿度过高，请马上前往地点查看！");
+                        dialog.setPositiveButton("确定", new
+                                DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+                        dialog.show();
+                    }
+                    if (qi[6].toString().contains("异常")) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+//                        dialog.setIcon(R.drawable.check_bg)
+                        dialog.setTitle("提示");
+                        dialog.setMessage(name[6]+"气体异常，请马上前往地点查看！");
+                        dialog.setPositiveButton("确定", new
+                                DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+                        dialog.show();
+                    }
+
+                    if (huo[6].toString().contains("异常")) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage(name[6]+"火焰异常，请马上前往地点查看！");
+                        dialog.setPositiveButton("确定", new
+                                DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+                        dialog.show();
+                    }
+                } else
+
+                {
+                    Log.d(TAG, "超时");
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                if (ex instanceof HttpException) { // 网络错误
+                    HttpException httpEx = (HttpException) ex;
+                    int responseCode = httpEx.getCode();
+                    String responseMsg = httpEx.getMessage();
+                    String errorResult = httpEx.getResult();
+                    // ...
+                } else { // 其他错误
+                    // ...
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                Toast.makeText(x.app(), "取消", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public boolean onCache(String result) {
+                return false;
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
@@ -450,6 +454,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
                 getView();
+                //setData();
             }
         }, 200, 500);//表示200毫秒之后，每隔500毫秒执行一次
     }

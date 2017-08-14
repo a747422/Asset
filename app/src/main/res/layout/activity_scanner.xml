@@ -30,11 +30,12 @@
             app:result_color="@color/result_view"
             app:result_point_color="@color/result_point_color"/>
         <ImageButton
+            android:id="@+id/IB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/light_off"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/light_off"
             />
     </FrameLayout>
 

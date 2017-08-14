@@ -72,6 +72,7 @@ public class SensorActivity extends BaseActivity {
         final String[] qi = new String[7];
         final String[] huo = new String[7];
         final String[] time = new String[7];
+        final String[] name = new String[7];
         RequestParams params = new RequestParams("http://112.74.212.95/php/select_temp.php");
 
         Callback.Cancelable cancelable
@@ -97,6 +98,7 @@ public class SensorActivity extends BaseActivity {
                         data2[j] = res.getHumidity();
                         qi[j] = res.getQi();
                         huo[j] = res.getHuo();
+                        name[j] = res.getplaceName().toString();
                         j--;
                     }
                     mChartView1.setTitle(time[6] + " " + title);
@@ -109,16 +111,31 @@ public class SensorActivity extends BaseActivity {
                     mChartView2.fresh();
                     tvQ.setText("气体传感器当前情况：" + qi[6].toString());
                     tvH.setText("火焰传感器当前情况：" + huo[6].toString());
-                    if (qi[6].toString().contains("异常")) {
+
+
+                    if (Double.parseDouble(data2[6].toString()) >= 90.0) {
                         AlertDialog.Builder dialog = new AlertDialog.Builder(SensorActivity.this);
-//                        dialog.setIcon(R.drawable.check_bg)
                         dialog.setTitle("提示");
-                        dialog.setMessage(qi[6].toString() + "地点，气体异常，请马上前往地点查看！");
+                        dialog.setMessage(name[6]+"湿度过高，请马上前往地点查看！");
                         dialog.setPositiveButton("确定", new
                                 DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        finish();
+
+                                    }
+                                });
+                        dialog.show();
+                    }
+                    if (qi[6].toString().contains("异常")) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(SensorActivity.this);
+//                        dialog.setIcon(R.drawable.check_bg)
+                        dialog.setTitle("提示");
+                        dialog.setMessage(name[6]+"气体异常，请马上前往地点查看！");
+                        dialog.setPositiveButton("确定", new
+                                DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
                                     }
                                 });
 
@@ -128,12 +145,12 @@ public class SensorActivity extends BaseActivity {
                     if (huo[6].toString().contains("异常")) {
                         AlertDialog.Builder dialog = new AlertDialog.Builder(SensorActivity.this);
                         dialog.setTitle("提示");
-                        dialog.setMessage(huo[6].toString() + "地点，火焰异常，请马上前往地点查看！");
+                        dialog.setMessage(name[6]+"火焰异常，请马上前往地点查看！");
                         dialog.setPositiveButton("确定", new
                                 DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        finish();
+
                                     }
                                 });
                         dialog.show();

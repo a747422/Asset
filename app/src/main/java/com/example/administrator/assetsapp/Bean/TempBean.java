@@ -15,9 +15,9 @@ public class TempBean {
     @SerializedName("happen_time")
     @Expose
     private String happenTime;
-    @SerializedName("placeNumber")
+    @SerializedName("placeName")
     @Expose
-    private String placeNumber;
+    private String placeName;
     @SerializedName("temp")
     @Expose
     private String temp;
@@ -47,12 +47,12 @@ public class TempBean {
         this.happenTime = happenTime;
     }
 
-    public String getPlaceNumber() {
-        return placeNumber;
+    public String getplaceName() {
+        return placeName;
     }
 
-    public void setPlaceNumber(String placeNumber) {
-        this.placeNumber = placeNumber;
+    public void setplaceName(String placeName) {
+        this.placeName = placeName;
     }
 
     public String getTemp() {

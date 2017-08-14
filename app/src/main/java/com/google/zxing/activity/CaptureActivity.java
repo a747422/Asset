@@ -7,6 +7,7 @@ import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -24,9 +25,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -71,6 +75,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 /**
  * Initial the camera
  * 二维码扫描。
+ *
  * @author Ryan.Tang
  */
 public class CaptureActivity extends BaseActivity implements Callback {
@@ -94,9 +99,14 @@ public class CaptureActivity extends BaseActivity implements Callback {
     public static final String TAG = "Captu2";
     public static final String API_BASE_URL = "http://112.74.212.95/php/";
     public String resp = "";
-
+    private Camera.Parameters parameter = null;
+    private Camera camera = null;
+    boolean flag = false;
+    Camera m_Camera;
     @BindView(R.id.scanner_toolbar_back)
     ImageView imgBack;
+    @BindView(R.id.IB)
+    ImageButton IB;
 
     /**
      * Called when the activity is first created.
@@ -114,9 +124,42 @@ public class CaptureActivity extends BaseActivity implements Callback {
         inactivityTimer = new InactivityTimer(this);
         //添加toolbar
         addToolbar();
+        IB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!flag) {
+                    IB.setBackground(getResources().getDrawable(R.drawable.light_on));
+                    try{
+                        camera.startPreview();
+                        parameter = camera.getParameters();
+                        parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                        camera.setParameters(parameter);
+                    } catch(Exception ex){}
+                    flag =true;
+                } else {
+                    IB.setBackground(getResources().getDrawable(R.drawable.light_off));
+                    try{
+                        parameter.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                        camera.setParameters(parameter);
+                        camera.release();
+
+                    } catch(Exception ex){}
+                    flag = false;
+                }
+            }
+        });
+
     }
 
-
+//    @OnClick(R.id.IB)
+//    public void OnClick() {
+//        if(IB.isSelected()){
+//            IB.setImageDrawable(getResources().getDrawable(R.drawable.light_on));
+//        }else {
+//            IB.setImageDrawable(getResources().getDrawable(R.drawable.light_off));
+//        }
+//    }
 
     private void addToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -217,12 +260,12 @@ public class CaptureActivity extends BaseActivity implements Callback {
 //                        dialog.setIcon(R.drawable.check_bg)
                             dialog.setTitle("提示");
                             Log.d(TAG, "标签名" + CardName[0]);
-                            dialog.setMessage("ID："+resultString+"\n设备名：" + CardName[0] + "\n入库时间：" + MASKSYNCV2[0]);
+                            dialog.setMessage("ID：" + resultString + "\n设备名：" + CardName[0] + "\n入库时间：" + MASKSYNCV2[0]);
                             dialog.setPositiveButton("确定", new
                                     DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                        //  finish();
+                                            //  finish();
                                         }
                                     });
 
@@ -236,7 +279,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
                                     DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                        // finish();
+                                            // finish();
                                         }
                                     });
                             dialog.show();
@@ -262,6 +305,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 //        CaptureActivity.this.finish();
 
     }
+
     Handler mHandler = new Handler();
     Runnable runnable = new Runnable() {
 
@@ -280,6 +324,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
             }
         }
     };
+
     private void initCamera(SurfaceHolder surfaceHolder) {
         try {
             CameraManager.get().openDriver(surfaceHolder);

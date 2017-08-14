@@ -67,13 +67,11 @@ public class LoginActivity extends AppCompatActivity {
     void login() {
         String id = usernameWrapper.getText().toString();
         String pwd = passwordWrapper.getText().toString();
-        if (id.equals(null) && pwd.equals(null)) {
+        if (id.isEmpty() && pwd.isEmpty()) {
             Toast.makeText(LoginActivity.this, "账号密码不能为空", Toast.LENGTH_SHORT).show();
-        } else if (id.equals(null) || pwd.equals(null)) {
+        } else if (id.isEmpty() || pwd.isEmpty()) {
             Toast.makeText(LoginActivity.this, "账号或密码不能为空", Toast.LENGTH_SHORT).show();
-
-        } else {
-
+        } else  {
 //        HashMap<String, Object> map = new HashMap<>();
 //        map.put("loginPwd", pwd);
 //        map.put("loginName", id);
